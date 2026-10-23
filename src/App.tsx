@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import type { ReactNode } from 'react'
+import { Component, useEffect, useRef, useState } from 'react'
+import type { ErrorInfo, ReactNode } from 'react'
 import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, FlaskConical, Menu, X } from 'lucide-react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, MeshTransmissionMaterial, OrbitControls, Sparkles } from '@react-three/drei'
@@ -247,10 +247,24 @@ function App() {
   )
 }
 
-function CanvasErrorBoundary({ children, fallback }: { children: ReactNode; fallback: ReactNode }) {
-  const [failed, setFailed] = useState(false)
-  if (failed) return <>{fallback}</>
-  return <div className="canvas-wrap" onError={() => setFailed(true)}>{children}</div>
+type CanvasErrorBoundaryProps = { children: ReactNode; fallback: ReactNode }
+type CanvasErrorBoundaryState = { failed: boolean }
+
+class CanvasErrorBoundary extends Component<CanvasErrorBoundaryProps, CanvasErrorBoundaryState> {
+  state: CanvasErrorBoundaryState = { failed: false }
+
+  static getDerivedStateFromError(): CanvasErrorBoundaryState {
+    return { failed: true }
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('3D canvas failed; using the visual fallback.', error, info)
+  }
+
+  render() {
+    if (this.state.failed) return <>{this.props.fallback}</>
+    return <div className="canvas-wrap">{this.props.children}</div>
+  }
 }
 
 export default App
