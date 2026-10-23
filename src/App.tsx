@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, FlaskConical, Menu, X } from 'lucide-react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, MeshTransmissionMaterial, OrbitControls, Sparkles } from '@react-three/drei'
@@ -246,7 +247,7 @@ function App() {
   )
 }
 
-function CanvasErrorBoundary({ children, fallback }: { children: React.ReactNode; fallback: React.ReactNode }) {
+function CanvasErrorBoundary({ children, fallback }: { children: ReactNode; fallback: ReactNode }) {
   const [failed, setFailed] = useState(false)
   if (failed) return <>{fallback}</>
   return <div className="canvas-wrap" onError={() => setFailed(true)}>{children}</div>
