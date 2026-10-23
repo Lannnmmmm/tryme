@@ -94,7 +94,7 @@ function Prism() {
 
 function OrbitalScene() {
   return (
-    <Canvas camera={{ position: [0, 0, 5.6], fov: 38 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
+    <Canvas camera={{ position: [0, 0, 6.8], fov: 38 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
       <ambientLight intensity={1.2} />
       <pointLight position={[3, 3, 4]} intensity={30} color="#f5d9a0" />
       <pointLight position={[-4, -2, 1]} intensity={18} color="#6d8dc9" />
@@ -102,11 +102,11 @@ function OrbitalScene() {
         <Prism />
       </Float>
       <mesh rotation={[Math.PI / 2.6, 0.2, -0.25]} position={[0, 0, -0.55]}>
-        <torusGeometry args={[2.05, 0.006, 8, 180]} />
+        <torusGeometry args={[1.82, 0.006, 8, 180]} />
         <meshBasicMaterial color="#d5b16d" transparent opacity={0.7} />
       </mesh>
       <mesh rotation={[0.7, -0.3, 0.45]} position={[0, 0, -0.7]}>
-        <torusGeometry args={[2.38, 0.004, 8, 180]} />
+        <torusGeometry args={[2.08, 0.004, 8, 180]} />
         <meshBasicMaterial color="#8091b2" transparent opacity={0.5} />
       </mesh>
       <Sparkles count={50} scale={5.8} size={1.4} speed={0.18} color="#d5b16d" />
